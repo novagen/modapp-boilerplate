@@ -213,6 +213,14 @@ class LayoutComponent {
 		this._delNavigation(route.id);
 	}
 
+	setAsideContent(component) {
+		if (!component) {
+			return;
+		}
+
+		this._setComponent("aside", component, this.defaultComponents.aside);
+	}
+
 	_setMainContent() {
 		const current = this.module.router.getCurrent();
 
@@ -221,7 +229,7 @@ class LayoutComponent {
 		}
 	}
 
-	_setAsideContent() {
+	_setAsideContent(component = null) {
 		const current = this.module.router.getCurrent();
 
 		if (current && current.route) {

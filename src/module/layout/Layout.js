@@ -23,7 +23,8 @@ class Layout {
 					type: 'boolean'
 				},
 				asideOpen: {
-					type: 'boolean'
+					type: 'boolean',
+					default: false
 				},
 				footerOpen: {
 					type: 'boolean',
@@ -35,6 +36,10 @@ class Layout {
 		this.component = new LayoutComponent(this.app, this.module, this.model);
 
 		this.app.setComponent(this.component);
+	}
+
+	setAsideComponent(component) {
+		this.component.setAsideContent(component);
 	}
 
 	openAside(open) {
