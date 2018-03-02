@@ -15,7 +15,6 @@ class Example {
 		this.app = app;
 
 		this._setState = this._setState.bind(this);
-
 		this.app.require([ 'router' ], this._init.bind(this));
 	}
 
@@ -28,8 +27,10 @@ class Example {
 			parentId: null,
 			order: 20,
 			setState: this._setState,
-			component: new ExampleComponent(this.app, this.module),
-			asideComponent: new AsideComponent(),
+			component: {
+				'main': new ExampleComponent(),
+				'aside': new AsideComponent()
+			},
 			getUrl: (params) => {
 				return;
 			},

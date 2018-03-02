@@ -2,9 +2,7 @@ import Elem from 'modapp-base-component/Elem';
 import Txt from 'modapp-base-component/Txt';
 
 class StartComponent {
-	constructor(app, module) {
-		this.app = app;
-		this.module = module;
+	constructor() {
 	}
 
 	render(el) {

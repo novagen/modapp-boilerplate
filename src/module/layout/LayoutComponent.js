@@ -229,7 +229,7 @@ class LayoutComponent {
 		const current = this.module.router.getCurrent();
 
 		if (current && current.route) {
-			this._setComponent("main", current.route.component, null);
+			this._setComponent("main", current.route.component['main'], null);
 		}
 	}
 
@@ -237,7 +237,7 @@ class LayoutComponent {
 		const current = this.module.router.getCurrent();
 
 		if (current && current.route) {
-			this._setComponent("aside", current.route.asideComponent, this.defaultComponents.aside);
+			this._setComponent("aside", current.route.component['aside'], this.defaultComponents.aside);
 		}
 	}
 
@@ -245,7 +245,7 @@ class LayoutComponent {
 		const current = this.module.router.getCurrent();
 
 		if (current && current.route) {
-			this._setComponent("header", current.route.headerComponent, this.defaultComponents.header);
+			this._setComponent("header", current.route.component['header'], this.defaultComponents.header);
 		}
 	}
 
@@ -253,7 +253,7 @@ class LayoutComponent {
 		const current = this.module.router.getCurrent();
 
 		if (current && current.route) {
-			this._setComponent("footer", current.route.footerComponent, this.defaultComponents.footer);
+			this._setComponent("footer", current.route.component['router'], this.defaultComponents.footer);
 		}
 	}
 

@@ -34,7 +34,6 @@ class Layout {
 		});
 
 		this.component = new LayoutComponent(this.app, this.module, this.model);
-
 		this.app.setComponent(this.component);
 	}
 

@@ -13,7 +13,6 @@ class Start {
 		this.app = app;
 
 		this._setState = this._setState.bind(this);
-
 		this.app.require([ 'router' ], this._init.bind(this));
 	}
 
@@ -26,7 +25,7 @@ class Start {
 			parentId: null,
 			order: 10,
 			setState: this._setState,
-			component: new StartComponent(this.app, this.module),
+			component: { 'main': new StartComponent() },
 			getUrl: (params) => {
 				return;
 			},
