@@ -17,6 +17,7 @@
 		"modapp-l10n": "^1.0.2",
 		"modapp-resource": "^1.0.2",
 		"modapp-resource-component": "^1.0.1",
+		"modapp-router": "^1.0.0",
 		"modapp-utils": "^1.0.1",
 		"nats": "^0.7.24",
 		"resclient": "^1.0.2"
