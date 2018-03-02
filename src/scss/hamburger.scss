@@ -9,6 +9,7 @@ button.menu-toggle {
 	touch-action: manipulation;
 	padding: 3px;
 	border-radius: 2px;
+	outline: none;
 	span,
 	&:before,
 	&:after {

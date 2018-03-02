@@ -2,6 +2,7 @@ $grid-nav-width:	200px;
 $grid-aside-width:	200px;
 $break-small:		1024px;
 $break-mobile:		768px;
+$nav-anim-speed:	250ms;
 
 @import 'variables.scss';
 
@@ -85,10 +86,11 @@ body {
 				height: 0;
 				overflow-x: hidden;
 				overflow-y: auto;
-				transition: height 100ms ease-in-out;
+				transition: height $nav-anim-speed ease-in-out;
+				z-index: $main-zindex + 1;
 				&.open {
 					height: 100%;
-					transition: height 100ms ease-in-out;
+					transition: height $nav-anim-speed ease-in-out;
 				}
 			}
 			aside {
