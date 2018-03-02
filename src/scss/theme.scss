@@ -1,0 +1,74 @@
+@import "~roboto-fontface/css/roboto/roboto-fontface.css";
+@import 'variables.scss';
+@import 'hamburger.scss';
+
+html {
+	font-family: $font-base-family;
+	font-size: $font-base-size;
+}
+
+body {
+	background: $body-background;
+}
+
+header {
+	color: $header-color;
+	background-color: $header-background;
+	padding: $header-padding;
+	box-shadow: $header-shadow;
+	z-index: $header-zindex;
+	font-size: $header-font-size;
+
+	.header-title {
+		cursor: pointer;
+		user-select: none;
+	}
+}
+
+footer {
+	color: $footer-color;
+	background-color: $footer-background;
+	padding: $footer-padding;
+	box-shadow: $footer-shadow;
+	z-index: $footer-zindex;
+	text-align: center;
+}
+
+aside {
+	color: $aside-color;
+	background-color: $aside-background;
+	padding: $aside-padding;
+	box-shadow: $aside-shadow;
+	z-index: $aside-zindex;
+}
+
+nav {
+	color: $nav-color;
+	background-color: $nav-background;
+	padding: $nav-padding;
+	box-shadow: $nav-shadow;
+	z-index: $nav-zindex;
+	&.navigation {
+		>ul {
+			>li {
+				background: $navigation-item-color;
+				>.item {
+					&.active {
+						background: $navigation-item-color-active;
+					}
+					&:hover {
+						background: $navigation-item-color-hover;
+					}
+				}
+			}
+		}
+	}
+}
+
+main {
+	color: $main-color;
+	background-color: $main-background;
+	padding: $main-padding;
+	box-shadow: $main-shadow;
+	z-index: $main-zindex;
+}

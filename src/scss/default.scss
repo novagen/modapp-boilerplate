@@ -1,0 +1,20 @@
+@import 'grid.scss';
+@import 'navigation.scss';
+@import 'theme.scss';
+
+html {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	max-height: 100vh;
+	margin: 0;
+	padding: 0;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
