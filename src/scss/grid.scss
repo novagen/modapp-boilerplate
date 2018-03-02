@@ -1,6 +1,5 @@
 $grid-nav-width:	200px;
 $grid-aside-width:	200px;
-$break-small:		1024px;
 $break-mobile:		768px;
 $nav-anim-speed:	250ms;
 
@@ -14,6 +13,7 @@ body {
 		grid-template-rows: auto 1fr auto;
 		grid-gap: 0;
 		height: 100vh;
+		transition: grid-template-columns 1s ease-in-out;
 		header {
 			grid-area: header;
 			.header-container {
@@ -50,21 +50,8 @@ body {
 		}
 
 		&.no-aside {
+			transition: grid-template-columns 1s ease-in-out;
 			grid-template-columns: $grid-nav-width auto 0;
-			aside {
-				display: none;
-			}
-		}
-	}
-}
-
-@media (max-width: $break-small) {
-	body {
-		div.body {
-			grid-template-columns: $grid-nav-width auto 0;
-			aside {
-				display: none;
-			}
 		}
 	}
 }
@@ -72,14 +59,30 @@ body {
 @media (max-width: $break-mobile) {
 	body {
 		div.body {
-			grid-template-areas: "header" "nav" "main" "footer" "aside";
+			grid-template-areas: "header" "nav" "aside" "main" "footer";
 			grid-template-columns: 1fr;
-			grid-template-rows: auto auto 1fr auto 0;
+			grid-template-rows: auto auto auto 1fr auto;
+			aside {
+				grid-row: 2 / span 3;
+				height: 100%;
+				overflow-x: hidden;
+				overflow-y: auto;
+				transition: height $nav-anim-speed ease-in-out;
+				z-index: $main-zindex + 1;
+			}
 			&.no-aside {
 				grid-template-columns: 1fr;
+				aside {
+					height: 0;
+					transition: height $nav-anim-speed ease-in-out;
+				}
+			}
+			footer {
+				transition: height $nav-anim-speed ease-in-out;
 			}
 			&.no-footer {
-				grid-template-rows: auto auto 1fr 0 0;
+				grid-template-rows: auto auto auto 1fr 0;
+				transition: height $nav-anim-speed ease-in-out;
 			}
 			nav {
 				grid-row: 2 / span 3;
@@ -87,14 +90,11 @@ body {
 				overflow-x: hidden;
 				overflow-y: auto;
 				transition: height $nav-anim-speed ease-in-out;
-				z-index: $main-zindex + 1;
+				z-index: $main-zindex + 2;
 				&.open {
 					height: 100%;
 					transition: height $nav-anim-speed ease-in-out;
 				}
-			}
-			aside {
-				display: none;
 			}
 			header {
 				.header-container {

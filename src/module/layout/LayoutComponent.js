@@ -18,7 +18,7 @@ class LayoutComponent {
 		this.model = model;
 
 		this.defaultComponents = {
-			header: new HeaderComponent(this),
+			header: new HeaderComponent(this.module.layout),
 			footer: new FooterComponent(),
 			aside: new AsideComponent()
 		};
@@ -53,12 +53,12 @@ class LayoutComponent {
 		this._setHeaderContent = this._setHeaderContent.bind(this);
 		this._setFooterContent = this._setFooterContent.bind(this);
 		this._setAsideContent = this._setAsideContent.bind(this);
-		this._openNav = this._openNav.bind(this);
+		this._layoutChanged = this._layoutChanged.bind(this);
 	}
 
 	render(el) {
 		this.node = new Elem(n =>
-			n.elem('div', { className: 'body' }, [ // Optional classes: no-aside, no-footer
+			n.elem('body', 'div', { className: 'body' + (this.model.asideOpen ? '' : ' no-aside') + (this.model.footerOpen ? '' : ' no-footer') }, [
 				n.elem('header', { }, [
 					n.component('header', new Transition())
 				]),
@@ -101,21 +101,43 @@ class LayoutComponent {
 		this.module.router.on('set', this._setRoute);
 		this.module.router.on('add', this._addRoute);
 		this.module.router.on('remove', this._delRoute);
-		this.model.on('change', this._openNav);
+		this.model.on('change', this._layoutChanged);
 
 		this._setRoute();
 		return this.node.render(el);
 	}
 
-	openMenu(open) {
-		this.model.set({ menuOpen: open });
-	}
-
-	_openNav(changed) {
-		if (!changed.hasOwnProperty('menuOpen')) {
-			return;
+	_layoutChanged(changed) {
+		if (changed.hasOwnProperty('menuOpen')) {
+			this._openMenu();
 		}
 
+		if (changed.hasOwnProperty('asideOpen')) {
+			this._openAside();
+		}
+
+		if (changed.hasOwnProperty('footerOpen')) {
+			this._openFooter();
+		}
+	}
+
+	_openAside() {
+		if (this.node) {
+			const body = this.node.getNode("body");
+
+			if (!body) {
+				return;
+			}
+
+			if (this.model.asideOpen) {
+				body.classList.remove("no-aside");
+			} else {
+				body.classList.add("no-aside");
+			}
+		}
+	}
+
+	_openMenu() {
 		if (this.node) {
 			const nav = this.node.getNode("nav");
 
@@ -127,6 +149,22 @@ class LayoutComponent {
 				nav.classList.add("open");
 			} else {
 				nav.classList.remove("open");
+			}
+		}
+	}
+
+	_openFooter() {
+		if (this.node) {
+			const body = this.node.getNode("body");
+
+			if (!body) {
+				return;
+			}
+
+			if (this.model.footerOpen) {
+				body.classList.remove("no-footer");
+			} else {
+				body.classList.add("no-footer");
 			}
 		}
 	}
@@ -262,7 +300,7 @@ class LayoutComponent {
 		this.module.router.off('set', this._setRoute);
 		this.module.router.off('add', this.addRoute);
 		this.module.router.off('remove', this.delRoute);
-		this.model.off('change', this._openNav);
+		this.model.off('change', this._layoutChanged);
 
 		this.node.unrender();
 		this.node = null;

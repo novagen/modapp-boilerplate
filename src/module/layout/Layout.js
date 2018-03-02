@@ -15,10 +15,19 @@ class Layout {
 
 	_init(module) {
 		this.module = module;
+		this.module.layout = this;
+
 		this.model = new Model(this.app.eventBus, 'module.layout.model', {
 			definition: {
 				menuOpen: {
 					type: 'boolean'
+				},
+				asideOpen: {
+					type: 'boolean'
+				},
+				footerOpen: {
+					type: 'boolean',
+					default: true
 				}
 			}
 		});
@@ -26,6 +35,18 @@ class Layout {
 		this.component = new LayoutComponent(this.app, this.module, this.model);
 
 		this.app.setComponent(this.component);
+	}
+
+	openAside(open) {
+		this.model.set({ asideOpen: open });
+	}
+
+	openMenu(open) {
+		this.model.set({ menuOpen: open });
+	}
+
+	openFooter(open) {
+		this.model.set({ footerOpen: open });
 	}
 
 	dispose() {
