@@ -2,7 +2,6 @@
 var path = require('path');
 var webpack = require("webpack");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 var fs = require('fs');
 
 var includePaths = [
@@ -36,7 +35,6 @@ module.exports = {
 		]
 	},
 	plugins: [
-		new FaviconsWebpackPlugin('./src/favicon.png'),
 		new HtmlWebpackPlugin({
 			template: 'src/index.html',
 			inject: 'body',

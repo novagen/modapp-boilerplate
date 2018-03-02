@@ -1,6 +1,7 @@
 /node_modules
 /coverage
 /docs
+/backup
 /package-lock.json
 /yarn.lock
 /webpack.alias.js

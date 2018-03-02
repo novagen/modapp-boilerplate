@@ -1,50 +1,46 @@
-@import 'node_modules/sass-material-colors/sass/sass-material-colors';
-@import 'node_modules/sass-material-colors/sass/sass-material-colors-classes';
-@import 'functions.scss';
-@import 'mixins.scss';
-
 // Theme config
 $navigation-item-color:			transparent;
-$navigation-item-color-active:	material-color('blue-grey', '200');
-$navigation-item-color-hover:	material-color('blue-grey', '300');
+$navigation-item-color-active:	#b0bec5;
+$navigation-item-color-hover:	#90a4ae;
 
 $body-background:				#fefefe;
 
-$hamburger-color:				material-color('cyan', '100');
+$hamburger-color:				#b2ebf2;
 
-$header-background:				material-color('blue', '600');
-$header-color:					material-color('cyan', '100');
+$header-background:				#1e88e5;
+$header-color:					#b2ebf2;
 $header-padding:				10px;
-$header-shadow:					box_shadow(1);
+$header-shadow:					0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 $header-zindex:					300;
 $header-font-size:				20px;
 
-$nav-background:				material-color('blue-grey', '100');
-$nav-color:						material-color('cyan', '900');
+$nav-background:				#cfd8dc;
+$nav-color:						#006064;
 $nav-padding:					0;
 $nav-shadow:					none;
 $nav-zindex:					100;
+$nav-item-bg-anim-speed:		100ms;
 
 $main-background:				transparent;
-$main-color:					material-color('lime', '900');
+$main-color:					#827717;
 $main-padding:					5px;
-$main-shadow:					box_shadow(1);
+$main-shadow:					0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 $main-zindex:					200;
 
-$aside-background:				material-color('blue-grey', '100');
-$aside-color:					material-color('cyan', '900');
+$aside-background:				#cfd8dc;
+$aside-color:					#006064;
 $aside-padding:					5px;
 $aside-shadow:					none;
 $aside-zindex:					100;
 
-$footer-background:				material-color('blue', '600');
-$footer-color:					material-color('cyan', '200');
+$footer-background:				#1e88e5;
+$footer-color:					#80deea;
 $footer-padding:				5px;
 $footer-shadow:					none;
 $footer-zindex:					100;
 
 // Font
-$font-base-family:				Roboto, "Helvetica Neue", sans-serif;
+$font-base-family:				sans-serif;
 $font-base-size:				13px;
 
 // Grid layout overrides

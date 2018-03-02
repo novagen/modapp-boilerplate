@@ -53,10 +53,13 @@ nav {
 			>li {
 				background: $navigation-item-color;
 				>.item {
+					transition: background-color $nav-item-bg-anim-speed ease-in-out;
 					&.active {
+						transition: background-color $nav-item-bg-anim-speed ease-in-out;
 						background: $navigation-item-color-active;
 					}
 					&:hover {
+						transition: background-color $nav-item-bg-anim-speed ease-in-out;
 						background: $navigation-item-color-hover;
 					}
 				}
