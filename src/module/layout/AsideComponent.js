@@ -1,5 +1,4 @@
 import Elem from 'modapp-base-component/Elem';
-import Txt from 'modapp-base-component/Txt';
 
 /**
  * Initial aside component
@@ -12,7 +11,7 @@ class AsideComponent {
 
 	render(el) {
 		this.node = new Elem(n =>
-			n.component(new Txt('aside'))
+			n.component(null)
 		);
 
 		return this.node.render(el);

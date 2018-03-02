@@ -107,6 +107,18 @@ class LayoutComponent {
 		return this.node.render(el);
 	}
 
+	/**
+	 * Show a component in the aside area
+	 * @param {object} component The component to load in the aside area
+	 */
+	setAsideContent(component) {
+		if (!component) {
+			return;
+		}
+
+		this._setComponent("aside", component, this.defaultComponents.aside);
+	}
+
 	_layoutChanged(changed) {
 		if (changed.hasOwnProperty('menuOpen')) {
 			this._openMenu();
@@ -213,14 +225,6 @@ class LayoutComponent {
 		this._delNavigation(route.id);
 	}
 
-	setAsideContent(component) {
-		if (!component) {
-			return;
-		}
-
-		this._setComponent("aside", component, this.defaultComponents.aside);
-	}
-
 	_setMainContent() {
 		const current = this.module.router.getCurrent();
 
@@ -229,7 +233,7 @@ class LayoutComponent {
 		}
 	}
 
-	_setAsideContent(component = null) {
+	_setAsideContent() {
 		const current = this.module.router.getCurrent();
 
 		if (current && current.route) {

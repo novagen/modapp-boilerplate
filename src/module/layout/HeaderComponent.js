@@ -12,7 +12,7 @@ class HeaderComponent {
 	constructor(layout) {
 		this.layout = layout;
 
-		this._click = this._click.bind(this);
+		this._toggleMenu = this._toggleMenu.bind(this);
 		this._layoutChanged = this._layoutChanged.bind(this);
 	}
 
@@ -28,7 +28,7 @@ class HeaderComponent {
 						}
 					} }
 				})),
-				n.component('expand', new Button('', this._click, { className: 'menu-toggle' }))
+				n.component('expand', new Button('', this._toggleMenu, { className: 'menu-toggle' }))
 			])
 		);
 
@@ -36,7 +36,7 @@ class HeaderComponent {
 		return this.node.render(el);
 	}
 
-	_click() {
+	_toggleMenu() {
 		this.layout.openMenu(!this.layout.model.menuOpen);
 	}
 
