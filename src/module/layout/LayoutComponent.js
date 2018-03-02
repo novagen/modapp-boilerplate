@@ -302,10 +302,20 @@ class LayoutComponent {
 		});
 
 		this.navigation.add(navItem);
+		this._highlightActive();
 	}
 
 	_delNavigation(id) {
 		this.navigation.remove(id);
+
+		let currentRoute = this.module.router.getCurrent();
+		let defaultRoute = this.module.router.getDefaultRoute();
+
+		if (defaultRoute && currentRoute && currentRoute.route.id === id) {
+			if (defaultRoute) {
+				this.module.router.setRoute(defaultRoute.routeId, defaultRoute.params);
+			}
+		}
 	}
 
 	unrender() {
