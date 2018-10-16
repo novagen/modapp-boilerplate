@@ -42,6 +42,13 @@ body {
 			grid-area: footer;
 		}
 
+		&.no-menu {
+			grid-template-rows: 0 1fr auto;
+			nav {
+				display: none;
+			}
+		}
+
 		&.no-footer {
 			grid-template-rows: auto 1fr 0;
 			footer {

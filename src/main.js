@@ -1,5 +1,4 @@
-import { AppExt } from 'modapp/ext';
-import eventBus from 'modapp/eventBus';
+import { AppExt, eventBus } from 'modapp';
 import modules from './modules';
 import config from './module.config';
 import Router from 'modapp-router/Router';

@@ -1,8 +1,6 @@
 import ExampleComponent from './ExampleComponent';
 import AsideComponent from './AsideComponent';
 
-import l10n from 'modapp-l10n';
-
 const routeId = "example";
 
 /**
@@ -23,7 +21,7 @@ class Example {
 
 		this.module.router.addRoute({
 			id: routeId,
-			name: l10n.t('module.example', `Example`),
+			name: 'Example',
 			parentId: null,
 			order: 20,
 			setState: this._setState,

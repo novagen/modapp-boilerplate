@@ -1,14 +1,10 @@
-import Elem from 'modapp-base-component/Elem';
-import ModelTxt from 'modapp-resource-component/ModelTxt';
-import CollectionList from 'modapp-resource-component/CollectionList';
-import Collection from 'modapp-resource/Collection';
-import Transition from 'modapp-base-component/Transition';
-import Model from 'modapp-resource/Model';
+import { Elem, Transition } from 'modapp-base-component';
+import { ModelTxt, CollectionList } from 'modapp-resource-component';
+import { Collection, Model } from 'modapp-resource';
 import MainComponent from './MainComponent';
 import HeaderComponent from './HeaderComponent';
 import FooterComponent from './FooterComponent';
 import AsideComponent from './AsideComponent';
-import l10n from 'modapp-l10n';
 
 class LayoutComponent {
 
@@ -23,14 +19,16 @@ class LayoutComponent {
 			aside: new AsideComponent()
 		};
 
-		this.navigation = new Collection(this.app.eventBus, 'navigation', {
+		this.navigation = new Collection({
+			namespace: 'navigation',
+			eventBus: this.app.eventBus,
 			idAttribute: m => m.id,
-			compare: function(a, b) {
+			compare: (a, b) => {
 				let ao = typeof(a.order) === 'number' ? a.order : -1,
 					bo = typeof(b.order) === 'number' ? b.order : -1;
 
 				if (ao === bo) {
-					return l10n.t(a.name).localeCompare(l10n.t(b.name));
+					return a.name.localeCompare(b.name);
 				}
 
 				// Non-set sortOrder should come after all sorted values
@@ -120,9 +118,9 @@ class LayoutComponent {
 	}
 
 	_layoutChanged(changed) {
-		if (changed.hasOwnProperty('menuOpen')) {
-			this._openMenu();
-		}
+		// if (changed.hasOwnProperty('menuOpen')) {
+		// 	this._openMenu();
+		// }
 
 		if (changed.hasOwnProperty('asideOpen')) {
 			this._openAside();
@@ -151,16 +149,16 @@ class LayoutComponent {
 
 	_openMenu() {
 		if (this.node) {
-			const nav = this.node.getNode("nav");
+			const body = this.node.getNode("body");
 
-			if (!nav) {
+			if (!body) {
 				return;
 			}
 
 			if (this.model.menuOpen) {
-				nav.classList.add("open");
+				body.classList.remove("no-menu");
 			} else {
-				nav.classList.remove("open");
+				body.classList.add("no-menu");
 			}
 		}
 	}
@@ -291,13 +289,16 @@ class LayoutComponent {
 
 		if (routes) {
 			for (let key in routes) {
+				console.log(key);
 				this._addNavigation(routes[key]);
 			}
 		}
 	}
 
 	_addNavigation(item) {
-		let navItem = new Model(this.app.eventBus, 'navigation', {
+		let navItem = new Model({
+			namespace: 'navigation',
+			eventBus: this.app.eventBus,
 			data: item
 		});
 

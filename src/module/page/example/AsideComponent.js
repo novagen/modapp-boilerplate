@@ -1,5 +1,4 @@
-import Elem from 'modapp-base-component/Elem';
-import Txt from 'modapp-base-component/Txt';
+import { Elem, Txt } from 'modapp-base-component';
 
 /**
  * Example aside component

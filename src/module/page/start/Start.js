@@ -1,5 +1,4 @@
 import StartComponent from './StartComponent';
-import l10n from 'modapp-l10n';
 
 const routeId = "start";
 
@@ -21,7 +20,7 @@ class Start {
 
 		this.module.router.addRoute({
 			id: routeId,
-			name: l10n.t('module.start', `Start`),
+			name: 'Start',
 			parentId: null,
 			order: 10,
 			setState: this._setState,

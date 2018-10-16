@@ -1,4 +1,4 @@
-import Elem from 'modapp-base-component/Elem';
+import { Elem } from 'modapp-base-component';
 
 /**
  * Initial main component

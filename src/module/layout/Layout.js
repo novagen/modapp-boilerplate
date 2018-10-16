@@ -1,4 +1,4 @@
-import Model from 'modapp-resource/Model';
+import { Model } from 'modapp-resource';
 import LayoutComponent from './LayoutComponent';
 
 import './Layout.scss';
@@ -17,10 +17,13 @@ class Layout {
 		this.module = module;
 		this.module.layout = this;
 
-		this.model = new Model(this.app.eventBus, 'module.layout.model', {
+		this.model = new Model({
+			eventBus: this.app.eventBus,
+			namespace: 'module.layout.model',
 			definition: {
 				menuOpen: {
-					type: 'boolean'
+					type: 'boolean',
+					default: true
 				},
 				asideOpen: {
 					type: 'boolean',
