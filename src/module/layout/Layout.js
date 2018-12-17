@@ -32,6 +32,10 @@ class Layout {
 				footerOpen: {
 					type: 'boolean',
 					default: false
+				},
+				menuExpanded: {
+					type: 'boolean',
+					default: false
 				}
 			}
 		});
@@ -70,6 +74,14 @@ class Layout {
 	 */
 	openFooter(open) {
 		this.model.set({ footerOpen: open });
+	}
+
+	/**
+	 * Expand / collapse the nav area
+	 * @param {boolean} expanded true if it should be expanded, false if it should be collapsed
+	 */
+	expandMenu(expanded) {
+		this.model.set({ menuExpanded: expanded });
 	}
 
 	dispose() {

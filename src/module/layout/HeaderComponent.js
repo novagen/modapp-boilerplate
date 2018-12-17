@@ -1,4 +1,5 @@
-import { Elem, Txt, Button } from 'modapp-base-component';
+import { Elem, Txt } from 'modapp-base-component';
+import { ModelButton } from 'modapp-resource-component';
 
 /**
  * Initial header component
@@ -6,8 +7,9 @@ import { Elem, Txt, Button } from 'modapp-base-component';
  */
 class HeaderComponent {
 
-	constructor(layout) {
+	constructor(layout, model) {
 		this.layout = layout;
+		this.model = model;
 
 		this._toggleMenu = this._toggleMenu.bind(this);
 		this._layoutChanged = this._layoutChanged.bind(this);
@@ -25,7 +27,20 @@ class HeaderComponent {
 						}
 					} }
 				})),
-				n.component('expand', new Button('', this._toggleMenu, { className: 'menu-toggle' }))
+				n.component('expand', new ModelButton(this.model, (m, c, changed) => {
+					if (!m.menuOpen) { // Hide button if menu is disabled
+						c.addClass("hidden");
+					} else {
+						c.removeClass("hidden");
+					}
+
+					if (m.menuExpanded) { // Expand the menu for mobile devices
+						c.addClass("open");
+					} else {
+						c.removeClass("open");
+					}
+
+				}, this._toggleMenu, { className: 'menu-toggle' }))
 			])
 		);
 
@@ -34,25 +49,10 @@ class HeaderComponent {
 	}
 
 	_toggleMenu() {
-		this.layout.openMenu(!this.layout.model.menuOpen);
+		this.layout.expandMenu(!this.layout.model.menuExpanded);
 	}
 
 	_layoutChanged(changed) {
-		if (changed.hasOwnProperty('menuOpen')) {
-			if (this.node) {
-				const button = this.node.getNode("expand");
-
-				if (!button) {
-					return;
-				}
-
-				if (this.layout.model.menuOpen) {
-					button.addClass("open");
-				} else {
-					button.removeClass("open");
-				}
-			}
-		}
 	}
 
 	unrender() {

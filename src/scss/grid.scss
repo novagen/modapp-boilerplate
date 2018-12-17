@@ -94,6 +94,7 @@ body {
 			nav {
 				grid-row: 2 / span 3;
 				height: 0;
+				display: block;
 				overflow-x: hidden;
 				overflow-y: auto;
 				transition: height $nav-anim-speed ease-in-out;
@@ -107,6 +108,9 @@ body {
 				.header-container {
 					>.menu-toggle {
 						display: block;
+						&.hidden {
+							display: none;
+						}
 					}
 				}
 			}

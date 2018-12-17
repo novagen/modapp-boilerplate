@@ -14,7 +14,7 @@ class LayoutComponent {
 		this.model = model;
 
 		this.defaultComponents = {
-			header: new HeaderComponent(this.module.layout),
+			header: new HeaderComponent(this.module.layout, this.model),
 			footer: new FooterComponent(),
 			aside: new AsideComponent()
 		};
@@ -118,9 +118,13 @@ class LayoutComponent {
 	}
 
 	_layoutChanged(changed) {
-		// if (changed.hasOwnProperty('menuOpen')) {
-		// 	this._openMenu();
-		// }
+		if (changed.hasOwnProperty('menuOpen')) {
+			this._openMenu();
+		}
+
+		if (changed.hasOwnProperty('menuExpanded')) {
+			this._expandMenu();
+		}
 
 		if (changed.hasOwnProperty('asideOpen')) {
 			this._openAside();
@@ -143,6 +147,22 @@ class LayoutComponent {
 				body.classList.remove("no-aside");
 			} else {
 				body.classList.add("no-aside");
+			}
+		}
+	}
+
+	_expandMenu() {
+		if (this.node) {
+			const nav = this.node.getNode("nav");
+
+			if (!nav) {
+				return;
+			}
+
+			if (this.model.menuExpanded) {
+				nav.classList.add("open");
+			} else {
+				nav.classList.remove("open");
 			}
 		}
 	}
@@ -205,7 +225,7 @@ class LayoutComponent {
 	}
 
 	_setRoute(route) {
-		this.model.set({ menuOpen: false });
+		this.model.set({ menuExpanded: false });
 
 		this._setMainContent();
 		this._setAsideContent();
@@ -289,7 +309,6 @@ class LayoutComponent {
 
 		if (routes) {
 			for (let key in routes) {
-				console.log(key);
 				this._addNavigation(routes[key]);
 			}
 		}
