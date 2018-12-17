@@ -79,6 +79,10 @@ class LayoutComponent {
 							},
 							className: 'item'
 						});
+					},
+					{
+						tagName: 'ul',
+						subTagName: 'li'
 					}))
 				]),
 				n.elem('main', { className: 'content' }, [
