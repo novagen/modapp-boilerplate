@@ -15,7 +15,7 @@ class LayoutComponent {
 
 		this.defaultComponents = {
 			header: new HeaderComponent(this.module.layout, this.model),
-			footer: new FooterComponent(),
+			footer: new FooterComponent(this.model),
 			aside: new AsideComponent()
 		};
 
@@ -52,6 +52,7 @@ class LayoutComponent {
 		this._setFooterContent = this._setFooterContent.bind(this);
 		this._setAsideContent = this._setAsideContent.bind(this);
 		this._layoutChanged = this._layoutChanged.bind(this);
+		this._updateTitle = this._updateTitle.bind(this);
 	}
 
 	render(el) {
@@ -106,6 +107,7 @@ class LayoutComponent {
 		this.model.on('change', this._layoutChanged);
 
 		this._setRoute();
+		this._updateTitle();
 		return this.node.render(el);
 	}
 
@@ -122,6 +124,10 @@ class LayoutComponent {
 	}
 
 	_layoutChanged(changed) {
+		if (changed.hasOwnProperty('title')) {
+			this._updateTitle();
+		}
+
 		if (changed.hasOwnProperty('menuOpen')) {
 			this._openMenu();
 		}
@@ -137,6 +143,10 @@ class LayoutComponent {
 		if (changed.hasOwnProperty('footerOpen')) {
 			this._openFooter();
 		}
+	}
+
+	_updateTitle() {
+		document.title = this.model.title;
 	}
 
 	_openAside() {

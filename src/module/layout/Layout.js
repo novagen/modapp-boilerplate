@@ -1,7 +1,13 @@
 import { Model } from 'modapp-resource';
 import LayoutComponent from './LayoutComponent';
 
+const namespace = 'module.layout';
+
 const OBJ_DEF = {
+	title: {
+		type: 'string',
+		default: ''
+	},
 	menuOpen: {
 		type: 'boolean',
 		default: true
@@ -30,7 +36,7 @@ class Layout {
 
 		this.model = new Model({
 			eventBus: this.app.eventBus,
-			namespace: 'module.layout.model',
+			namespace: namespace + '.model',
 			definition: OBJ_DEF,
 			data: params
 		});
@@ -60,6 +66,14 @@ class Layout {
 	 */
 	openAside(open) {
 		this.model.set({ asideOpen: open });
+	}
+
+	/**
+	 * Change application title
+	 * @param {boolean} title the title to use
+	 */
+	setTitle(title) {
+		this.model.set({ title: title });
 	}
 
 	/**

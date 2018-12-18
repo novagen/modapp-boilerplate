@@ -1,13 +1,18 @@
 // Theme config
 
+// General
 $body-background:				#fefefe;
+$font-base-family:				sans-serif;
+$font-base-size:				13px;
 
 $hamburger-color:				#b2ebf2;
 
+// Grid
 $grid-nav-width:				200px;
 $grid-aside-width:				200px;
 $grid-break-mobile:				768px;
 
+//Header
 $header-background:				#1e88e5;
 $header-color:					#b2ebf2;
 $header-padding:				10px;
@@ -15,35 +20,36 @@ $header-shadow:					0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)
 $header-zindex:					300;
 $header-font-size:				20px;
 
-$nav-item-color:				transparent;
-$nav-item-color-active:			#b0bec5;
-$nav-item-color-hover:			#90a4ae;
+// Navigation
 $nav-background:				#cfd8dc;
 $nav-color:						#006064;
 $nav-padding:					0;
 $nav-shadow:					none;
 $nav-zindex:					100;
+$nav-item-color:				transparent;
+$nav-item-color-active:			#b0bec5;
+$nav-item-color-hover:			#90a4ae;
 $nav-item-bg-anim-speed:		100ms;
+$nav-item-bg-anim-type:			ease-in-out;
 $nav-item-padding:				5px;
 
+// Main content
 $main-background:				transparent;
 $main-color:					#827717;
 $main-padding:					5px;
 $main-shadow:					0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 $main-zindex:					200;
 
+// Aside
 $aside-background:				#cfd8dc;
 $aside-color:					#006064;
 $aside-padding:					5px;
 $aside-shadow:					none;
 $aside-zindex:					100;
 
+// Footer
 $footer-background:				#1e88e5;
 $footer-color:					#80deea;
 $footer-padding:				5px;
 $footer-shadow:					none;
 $footer-zindex:					100;
-
-// Font
-$font-base-family:				sans-serif;
-$font-base-size:				13px;

@@ -1,5 +1,5 @@
-import { Elem, Txt } from 'modapp-base-component';
-import { ModelButton } from 'modapp-resource-component';
+import { Elem } from 'modapp-base-component';
+import { ModelButton, ModelTxt } from 'modapp-resource-component';
 
 /**
  * Initial header component
@@ -18,7 +18,7 @@ class HeaderComponent {
 	render(el) {
 		this.node = new Elem(n =>
 			n.elem('div', { className: 'header-container' }, [
-				n.component(new Txt('AppName', { className: 'header-title', events: {
+				n.component(new ModelTxt(this.model, m => m.title, { className: 'header-title', events: {
 					click: () => {
 						let defaultRoute = this.layout.module.router.getDefaultRoute();
 

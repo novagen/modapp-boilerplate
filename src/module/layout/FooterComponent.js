@@ -1,4 +1,5 @@
-import { Elem, Txt } from 'modapp-base-component';
+import { Elem } from 'modapp-base-component';
+import { ModelTxt } from 'modapp-resource-component';
 
 /**
  * Initial footer component
@@ -6,12 +7,13 @@ import { Elem, Txt } from 'modapp-base-component';
  */
 class FooterComponent {
 
-	constructor() {
+	constructor(model) {
+		this.model = model;
 	}
 
 	render(el) {
 		this.node = new Elem(n =>
-			n.component(new Txt('AppName'))
+			n.component(new ModelTxt(this.model, model => model.title))
 		);
 
 		return this.node.render(el);

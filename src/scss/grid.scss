@@ -70,13 +70,6 @@ body {
 			grid-template-areas: "header" "nav" "aside" "main" "footer";
 			grid-template-columns: 1fr;
 			grid-template-rows: auto auto auto 1fr auto;
-			aside {
-				grid-row: 2 / span 3;
-				height: 100%;
-				overflow-x: hidden;
-				overflow-y: auto;
-				z-index: $main-zindex + 1;
-			}
 			header {
 				.header-container {
 					>.menu-toggle {
@@ -86,8 +79,6 @@ body {
 						}
 					}
 				}
-			}
-			footer {
 			}
 			nav {
 				grid-row: 2 / span 3;
@@ -100,30 +91,20 @@ body {
 					height: 100%;
 				}
 			}
+			aside {
+				display: none;
+			}
+
 			&.no-footer {
 				grid-template-rows: auto auto auto 1fr 0;
 			}
-			&.no-aside {
-				grid-template-columns: 1fr;
-
-				aside {
-					display: none;
-				}
-			}
-			&.no-menu {
+			&.no-aside,
+			&.no-menu,
+			&.no-menu.no-aside
+			{
 				grid-template-columns: 1fr;
 
 				nav {
-					display: none;
-				}
-			}
-			&.no-aside.no-menu {
-				grid-template-columns: 1fr;
-
-				nav {
-					display: none;
-				}
-				aside {
 					display: none;
 				}
 			}

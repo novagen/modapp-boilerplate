@@ -60,14 +60,14 @@ nav {
 			>li {
 				background: $nav-item-color;
 				>.item {
-					transition: background-color $nav-item-bg-anim-speed ease-in-out;
+					transition: all $nav-item-bg-anim-speed $nav-item-bg-anim-type;
 					padding: $nav-item-padding;
 					&.active {
-						transition: background-color $nav-item-bg-anim-speed ease-in-out;
+						transition: all $nav-item-bg-anim-speed $nav-item-bg-anim-type;
 						background: $nav-item-color-active;
 					}
 					&:hover {
-						transition: background-color $nav-item-bg-anim-speed ease-in-out;
+						transition: all $nav-item-bg-anim-speed $nav-item-bg-anim-type;
 						background: $nav-item-color-hover;
 					}
 				}
