@@ -5,3 +5,4 @@
 /package-lock.json
 /yarn.lock
 /webpack.alias.js
+/*.log

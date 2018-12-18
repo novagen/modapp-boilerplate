@@ -24,6 +24,7 @@ if (fs.existsSync(aliasPath)) {
 }
 
 module.exports = {
+	mode: "development",
 	devtool: 'eval-source-map',
 	entry: {
 		app: path.join(__dirname, 'src/main.js')
@@ -54,20 +55,11 @@ module.exports = {
 		})
 	],
 	module: {
-		loaders: [
+		rules: [
 			{
 				test: /\.js$/,
 				include: includePaths,
-				loader: 'babel-loader',
-				query: {
-					presets: [
-						[ 'env', {
-							targets: {
-								chrome: "61"
-							}
-						}]
-					]
-				}
+				loader: 'babel-loader'
 			},
 			{
 				test: /\.js$/,
