@@ -8,6 +8,14 @@ const OBJ_DEF = {
 		type: 'string',
 		default: ''
 	},
+	usePageInTitle: {
+		type: 'boolean',
+		default: false
+	},
+	titlePageSeparator: {
+		type: 'string',
+		default: ':'
+	},
 	menuOpen: {
 		type: 'boolean',
 		default: true
@@ -50,14 +58,6 @@ class Layout {
 
 		this.component = new LayoutComponent(this.app, this.module, this.model);
 		this.app.setComponent(this.component);
-	}
-
-	/**
-	 * Show a component in the aside area
-	 * @param {object} component The component to load in the aside area
-	 */
-	setAsideComponent(component) {
-		this.component.setAsideContent(component);
 	}
 
 	/**

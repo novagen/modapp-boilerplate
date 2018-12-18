@@ -8,6 +8,8 @@ const config = {
 	},
 	layout: {
 		title: 'Boilerplate',
+		usePageInTitle: true,
+		titlePageSeparator: '-',
 		menuOpen: true,
 		asideOpen: true,
 		footerOpen: true

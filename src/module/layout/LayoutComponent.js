@@ -6,6 +6,22 @@ import HeaderComponent from './HeaderComponent';
 import FooterComponent from './FooterComponent';
 import AsideComponent from './AsideComponent';
 
+const menuSorter = (a, b) => {
+	let ao = typeof(a.order) === 'number' ? a.order : -1,
+		bo = typeof(b.order) === 'number' ? b.order : -1;
+
+	if (ao === bo) {
+		return a.name.localeCompare(b.name);
+	}
+
+	// Non-set sortOrder should come after all sorted values
+	if (ao === -1 || bo === -1) {
+		return ao === -1 ? 1 : -1;
+	}
+
+	return ao - bo;
+};
+
 class LayoutComponent {
 
 	constructor(app, module, model) {
@@ -23,21 +39,7 @@ class LayoutComponent {
 			namespace: 'navigation',
 			eventBus: this.app.eventBus,
 			idAttribute: m => m.id,
-			compare: (a, b) => {
-				let ao = typeof(a.order) === 'number' ? a.order : -1,
-					bo = typeof(b.order) === 'number' ? b.order : -1;
-
-				if (ao === bo) {
-					return a.name.localeCompare(b.name);
-				}
-
-				// Non-set sortOrder should come after all sorted values
-				if (ao === -1 || bo === -1) {
-					return ao === -1 ? 1 : -1;
-				}
-
-				return ao - bo;
-			}
+			compare: menuSorter
 		});
 
 		this._addNavigation = this._addNavigation.bind(this);
@@ -53,6 +55,8 @@ class LayoutComponent {
 		this._setAsideContent = this._setAsideContent.bind(this);
 		this._layoutChanged = this._layoutChanged.bind(this);
 		this._updateTitle = this._updateTitle.bind(this);
+		this._getNavigation = this._getNavigation.bind(this);
+		this._setListeners = this._setListeners.bind(this);
 	}
 
 	render(el) {
@@ -62,29 +66,7 @@ class LayoutComponent {
 					n.component('header', new Transition())
 				]),
 				n.elem('nav', 'nav', { className: 'navigation' }, [
-					n.component('menu', new CollectionList(this.navigation, m => {
-						return new ModelTxt(m, (m, c) => {
-							if (m.active) {
-								c.addClass("active");
-							} else {
-								c.removeClass("active");
-							}
-							return m.name;
-						}, {
-							events: {
-								click: (c, e) => {
-									this.module.router.setRoute(m.id, {
-										id: m.id
-									});
-								}
-							},
-							className: 'item'
-						});
-					},
-					{
-						tagName: 'ul',
-						subTagName: 'li'
-					}))
+					n.component('menu', this._getNavigation())
 				]),
 				n.elem('main', { className: 'content' }, [
 					n.component('main', new Transition())
@@ -100,27 +82,51 @@ class LayoutComponent {
 
 		this._initNavigation();
 		this._setDefaultContent();
-
-		this.module.router.on('set', this._setRoute);
-		this.module.router.on('add', this._addRoute);
-		this.module.router.on('remove', this._delRoute);
-		this.model.on('change', this._layoutChanged);
+		this._setListeners(true);
 
 		this._setRoute();
-		this._updateTitle();
+
 		return this.node.render(el);
 	}
 
-	/**
-	 * Show a component in the aside area
-	 * @param {object} component The component to load in the aside area
-	 */
-	setAsideContent(component) {
-		if (!component) {
-			return;
+	_setListeners(on) {
+		if (on) {
+			this.module.router.on('set', this._setRoute);
+			this.module.router.on('add', this._addRoute);
+			this.module.router.on('remove', this._delRoute);
+			this.model.on('change', this._layoutChanged);
+		} else {
+			this.module.router.off('set', this._setRoute);
+			this.module.router.off('add', this.addRoute);
+			this.module.router.off('remove', this.delRoute);
+			this.model.off('change', this._layoutChanged);
 		}
+	}
 
-		this._setComponent("aside", component, this.defaultComponents.aside);
+	_getNavigation() {
+		return new CollectionList(this.navigation, m => {
+			return new ModelTxt(m, (m, c) => {
+				if (m.active) {
+					c.addClass("active");
+				} else {
+					c.removeClass("active");
+				}
+				return m.name;
+			}, {
+				events: {
+					click: (c, e) => {
+						this.module.router.setRoute(m.id, {
+							id: m.id
+						});
+					}
+				},
+				className: 'item'
+			});
+		},
+		{
+			tagName: 'ul',
+			subTagName: 'li'
+		});
 	}
 
 	_layoutChanged(changed) {
@@ -146,7 +152,17 @@ class LayoutComponent {
 	}
 
 	_updateTitle() {
-		document.title = this.model.title;
+		let postfix = '';
+
+		if (this.model.usePageInTitle) {
+			const current = this.module.router.getCurrent();
+
+			if (current && current.route) {
+				postfix = " " + this.model.titlePageSeparator + " " + current.route.name;
+			}
+		}
+
+		document.title = this.model.title + postfix;
 	}
 
 	_openAside() {
@@ -247,6 +263,7 @@ class LayoutComponent {
 		this._setFooterContent();
 
 		this._highlightActive();
+		this._updateTitle();
 	}
 
 	_addRoute(route) {
@@ -353,11 +370,7 @@ class LayoutComponent {
 	}
 
 	unrender() {
-		this.module.router.off('set', this._setRoute);
-		this.module.router.off('add', this.addRoute);
-		this.module.router.off('remove', this.delRoute);
-		this.model.off('change', this._layoutChanged);
-
+		this._setListeners(false);
 		this.node.unrender();
 		this.node = null;
 	}
