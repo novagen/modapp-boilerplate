@@ -54,17 +54,21 @@ nav {
 	z-index: $nav-zindex;
 	&.navigation {
 		>ul {
+			margin: 0;
+			padding: 0;
+
 			>li {
-				background: $navigation-item-color;
+				background: $nav-item-color;
 				>.item {
 					transition: background-color $nav-item-bg-anim-speed ease-in-out;
+					padding: $nav-item-padding;
 					&.active {
 						transition: background-color $nav-item-bg-anim-speed ease-in-out;
-						background: $navigation-item-color-active;
+						background: $nav-item-color-active;
 					}
 					&:hover {
 						transition: background-color $nav-item-bg-anim-speed ease-in-out;
-						background: $navigation-item-color-hover;
+						background: $nav-item-color-hover;
 					}
 				}
 			}

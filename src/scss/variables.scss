@@ -1,11 +1,12 @@
 // Theme config
-$navigation-item-color:			transparent;
-$navigation-item-color-active:	#b0bec5;
-$navigation-item-color-hover:	#90a4ae;
 
 $body-background:				#fefefe;
 
 $hamburger-color:				#b2ebf2;
+
+$grid-nav-width:				200px;
+$grid-aside-width:				200px;
+$grid-break-mobile:				768px;
 
 $header-background:				#1e88e5;
 $header-color:					#b2ebf2;
@@ -14,12 +15,16 @@ $header-shadow:					0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)
 $header-zindex:					300;
 $header-font-size:				20px;
 
+$nav-item-color:				transparent;
+$nav-item-color-active:			#b0bec5;
+$nav-item-color-hover:			#90a4ae;
 $nav-background:				#cfd8dc;
 $nav-color:						#006064;
 $nav-padding:					0;
 $nav-shadow:					none;
 $nav-zindex:					100;
 $nav-item-bg-anim-speed:		100ms;
+$nav-item-padding:				5px;
 
 $main-background:				transparent;
 $main-color:					#827717;
@@ -42,9 +47,3 @@ $footer-zindex:					100;
 // Font
 $font-base-family:				sans-serif;
 $font-base-size:				13px;
-
-// Grid layout overrides
-// $grid-nav-width:				200px;
-// $grid-aside-width:			200px;
-// $break-mobile:				768px;
-// $nav-anim-speed:				250ms;

@@ -1,7 +1,24 @@
 import { Model } from 'modapp-resource';
 import LayoutComponent from './LayoutComponent';
 
-import './Layout.scss';
+const OBJ_DEF = {
+	menuOpen: {
+		type: 'boolean',
+		default: true
+	},
+	asideOpen: {
+		type: 'boolean',
+		default: false
+	},
+	footerOpen: {
+		type: 'boolean',
+		default: false
+	},
+	menuExpanded: {
+		type: 'boolean',
+		default: false
+	}
+};
 
 /**
  * Layout draws the main layout wireframe
@@ -10,35 +27,20 @@ import './Layout.scss';
 class Layout {
 	constructor(app, params) {
 		this.app = app;
+
+		this.model = new Model({
+			eventBus: this.app.eventBus,
+			namespace: 'module.layout.model',
+			definition: OBJ_DEF,
+			data: params
+		});
+
 		this.app.require([ 'router' ], this._init.bind(this));
 	}
 
 	_init(module) {
 		this.module = module;
 		this.module.layout = this;
-
-		this.model = new Model({
-			eventBus: this.app.eventBus,
-			namespace: 'module.layout.model',
-			definition: {
-				menuOpen: {
-					type: 'boolean',
-					default: true
-				},
-				asideOpen: {
-					type: 'boolean',
-					default: false
-				},
-				footerOpen: {
-					type: 'boolean',
-					default: false
-				},
-				menuExpanded: {
-					type: 'boolean',
-					default: false
-				}
-			}
-		});
 
 		this.component = new LayoutComponent(this.app, this.module, this.model);
 		this.app.setComponent(this.component);

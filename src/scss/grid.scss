@@ -1,8 +1,3 @@
-$grid-nav-width:	200px;
-$grid-aside-width:	200px;
-$break-mobile:		768px;
-$nav-anim-speed:	250ms;
-
 @import 'variables.scss';
 
 body {
@@ -69,7 +64,7 @@ body {
 	}
 }
 
-@media (max-width: $break-mobile) {
+@media (max-width: $grid-break-mobile) {
 	body {
 		div.body {
 			grid-template-areas: "header" "nav" "aside" "main" "footer";
@@ -93,7 +88,6 @@ body {
 				}
 			}
 			footer {
-				transition: height $nav-anim-speed ease-in-out;
 			}
 			nav {
 				grid-row: 2 / span 3;
@@ -101,11 +95,9 @@ body {
 				display: block;
 				overflow-x: hidden;
 				overflow-y: auto;
-				transition: height $nav-anim-speed ease-in-out;
 				z-index: $main-zindex + 2;
 				&.open {
 					height: 100%;
-					transition: height $nav-anim-speed ease-in-out;
 				}
 			}
 			&.no-footer {
